@@ -26,9 +26,6 @@ class TasksRelationManager extends RelationManager
                         false => 'Incomplete',
                     ])
                     ->default(false),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('assignedTo', 'name')
-                    ->label('Assigned To'),
             ]);
     }
 
