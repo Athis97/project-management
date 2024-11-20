@@ -11,7 +11,7 @@ class Team extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'owner_id'];
+    protected $fillable = ['name', 'description', 'owner_id', 'project_id'];
 
     /**
      * Define the relationship with the team owner (User).
@@ -26,22 +26,17 @@ class Team extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class, 'team_user')->withTimestamps();
+        return $this->belongsToMany(User::class, 'team_user', 'team_id', 'user_id')
+            ->using(TeamUser::class)
+            ->withPivot('role_id')
+            ->withTimestamps();
     }
 
     /**
-     * Define the relationship with roles.
+     * Define the relationship with project (one project can have many teams).
      */
-    public function roles()
+    public function project()
     {
-        return $this->hasMany(Role::class);
-    }
-
-    /**
-     * Define the relationship with permissions.
-     */
-    public function permissions()
-    {
-        return $this->hasMany(Permission::class);
+        return $this->belongsTo(Project::class);
     }
 }

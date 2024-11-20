@@ -10,7 +10,9 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'user_id',
+        'name',
+        'description',
+        'user_id'
     ];
 
     public function user()
@@ -21,5 +23,17 @@ class Project extends Model
     public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function members()
+    {
+        return $this->hasManyThrough(
+            TeamUser::class,
+            Team::class,
+            'project_id',
+            'team_id',
+            'id',
+            'id'
+        );
     }
 }
