@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -64,13 +65,5 @@ class User extends Authenticatable
     public function currentTeam()
     {
         return $this->belongsTo(Team::class, 'current_team_id');
-    }
-
-    /**
-     * Define roles for the user within a specific team.
-     */
-    public function rolesInTeam(Team $team)
-    {
-        return $this->roles()->where('team_id', $team->id);
     }
 }

@@ -36,4 +36,14 @@ class Project extends Model
             'id'
         );
     }
+
+    public function team()
+    {
+        return $this->hasOne(Team::class,'project_id');
+    }
+
+    public function invitations()
+    {
+        return $this->hasMany(ProjectInvitation::class);
+    }
 }
