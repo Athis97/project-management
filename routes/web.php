@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProjectInvitationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,4 +21,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/projects/invite/{token}', [ProjectInvitationController::class, 'accept'])->name('project.invitation');
+Route::get('/projects/invite/{token}', [App\Http\Controllers\ProjectInvitationController::class, 'accept'])->name('project.invitation');

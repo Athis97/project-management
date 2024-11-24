@@ -19,7 +19,8 @@ class ProjectInvitationController extends Controller
 
         // If the user is not logged in, redirect to login with the redirect URL
         if (!Auth::check()) {
-            return redirect()->route('filament.admin.auth.login')->with('redirect_url', route('project.invitation', ['token' => $token]));
+            session()->put('redirect_url', route('project.invitation', ['token' => $token]));
+            return redirect()->route('filament.admin.auth.login');
         }
 
         // Add the user to the project
